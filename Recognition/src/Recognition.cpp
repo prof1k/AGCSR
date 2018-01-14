@@ -25,7 +25,7 @@ void RecognitionPlate(cv::Mat plate)
 {
         if (openalpr.isLoaded())
         {
-        imshow("Input", plate);
+        //imshow("Input", plate);  //обойдемся дебагом
         openalpr.setTopN(5);
         //openalpr.setDefaultRegion("il");
         std::vector<alpr::AlprRegionOfInterest> regionsOfInterest;
@@ -83,7 +83,7 @@ void CameraAndDetect()
                 //cout << fps << endl;
 //              cv::flip(frame, frame, 1);
                 //imshow("MyWindow", frame);
-                if (fps > 40 )
+                if (fps > 240 )
                 {
                         cap >> frame;
                         //if(cascade.load(cascadeName))
