@@ -17,10 +17,11 @@
 #include <leptonica/allheaders.h>
 #include <tesseract/strngs.h>
 #include <alpr.h>
+#include "TransformPatterns.h"
 using namespace std;
 
 alpr::Alpr openalpr("ru", "./config/openalpr.conf", "/usr/share/openalpr/runtime_data");
-
+TransformPatterns tr("pathToPattern");
 void RecognitionPlate(cv::Mat plate)
 {
         if (openalpr.isLoaded())
