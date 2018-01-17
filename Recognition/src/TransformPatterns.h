@@ -6,6 +6,10 @@
  */
 
 #include <string>
+#include <iostream>
+#include <fstream>
+//#include <sstream>
+//#include <iterator>
 
 using namespace std;
 
@@ -13,9 +17,16 @@ using namespace std;
 #define TRANSFORMPATTERNS_H_
 
 class TransformPatterns {
+
 public:
 	TransformPatterns(string pathToPatterns);
 	virtual ~TransformPatterns();
+	// Заменяем нули на буквы
+	string transformation(string vehicleNumber, string pattern_regex);
+private:
+	void initialize(string pathToPatterns);
 };
+
+
 
 #endif /* TRANSFORMPATTERNS_H_ */

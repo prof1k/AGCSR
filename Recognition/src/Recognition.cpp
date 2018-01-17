@@ -20,8 +20,11 @@
 #include "TransformPatterns.h"
 using namespace std;
 
-alpr::Alpr openalpr("ru", "./config/openalpr.conf", "/usr/share/openalpr/runtime_data");
-TransformPatterns tr("pathToPattern");
+const string PATH_TO_PATTERNS = "/home/prof1k/LicensePlateGit/Recognition/Debug/config/ru.patterns";
+
+TransformPatterns tr(PATH_TO_PATTERNS); // class for transforming zeros into a letter 'o'
+
+alpr::Alpr openalpr("ru", "/home/prof1k/LicensePlateGit/Recognition/Debug/config/openalpr.conf", "/usr/share/openalpr/runtime_data");
 void RecognitionPlate(cv::Mat plate)
 {
         if (openalpr.isLoaded())
@@ -32,18 +35,49 @@ void RecognitionPlate(cv::Mat plate)
         std::vector<alpr::AlprRegionOfInterest> regionsOfInterest;
         regionsOfInterest.push_back(alpr::AlprRegionOfInterest(0, 0, plate.cols, plate.rows));
         alpr::AlprResults results = openalpr.recognize(plate.data, plate.elemSize(), plate.cols, plate.rows, regionsOfInterest);
+        string transorm;
         // cout << results.plates.size() << endl;
         for (int i = 0; i < results.plates.size(); i++)
         {
            alpr::AlprPlateResult plate = results.plates[i];
            std::cout << "plate" << i << ": " << plate.topNPlates.size() << " results" << std::endl;
+           alpr::AlprPlate candidate;
 
-             for (int k = 0; k < plate.topNPlates.size(); k++)
+           for (int k = 0; k < plate.topNPlates.size(); k++)
+           {
+             candidate = plate.topNPlates[k];
+
+             if (candidate.matches_template)
              {
-               alpr::AlprPlate candidate = plate.topNPlates[k];
-               std::cout << "    - " << candidate.characters << "\t confidence: " << candidate.overall_confidence;
-               std::cout << "\t pattern_match: " << candidate.matches_template << std::endl;
+            	 break;
              }
+
+             std::cout << "    - " << candidate.characters << "\t confidence: " << candidate.overall_confidence;
+             std::cout << "\t pattern_match: " << candidate.matches_template << std::endl;
+           }
+
+           if (!candidate.matches_template)
+           {
+           alpr::AlprPlate candi2 = plate.bestPlate;
+           transorm = "";
+           transorm = tr.transformation(candi2.characters);
+           if (transorm != "")
+           {
+        	   std::cout << "    - " << candi2.characters << "\t confidence: " << candi2.overall_confidence;
+        	   std::cout << "\t pattern_match: " << candi2.matches_template << std::endl;
+           }
+           else
+           {
+        	   std::cout << "    - " << candidate.characters << "\t confidence: " << candidate.overall_confidence;
+        	                  std::cout << "\t pattern_match: " << candidate.matches_template << std::endl;
+           }
+           cout << "  After transform. " << transorm << endl;
+           }
+           else
+           {
+        	   // MUTIM CANDIDAT!!!
+           }
+
         }
         }
         else
@@ -60,7 +94,7 @@ void CameraAndDetect()
 
         //cap.open(0);
         //cap.open("./MOVI0005.avi");
-        cap.open("./ch5.avi");
+        cap.open("/home/prof1k/LicensePlateGit/Recognition/Debug/ch5.avi");
 
 
 //      cap.set(CV_CAP_PROP_FOURCC, CV_FOURCC('M','J','P','G'));
@@ -102,7 +136,7 @@ void CameraAndDetect()
 }
 
 int main() {
-	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
+	//cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
 	CameraAndDetect();
 	return 0;
 }
