@@ -7,21 +7,29 @@
 
 #include "config.h"
 #include "simpleini/SimpleIni.h"
+#include "constans.h"
 
-namespace agcsr {
 
-config::config() {
+Config::Config() {
 	// TODO Auto-generated constructor stub
 
 }
 
-config::~config() {
+Config::~Config() {
 	// TODO Auto-generated destructor stub
 }
 
-void read_config()
+void Config::read_config()
 {
-	CSimpleIniA ini;
-}
+	const char *pszVal = 0;
 
-} /* namespace agcsr */
+	CSimpleIniA ini;
+	ini.SetUnicode();
+	ini.LoadFile(CONFIG_FILE);
+	//ini.GetAllValues("dbhost", a_pKey, a_values)
+	bool bHasMulti;
+	ini.GetValue("mysql", "dbhost", "localhost", &bHasMulti);
+
+	cout << pszVal;
+
+}

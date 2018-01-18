@@ -19,6 +19,7 @@
 #include <alpr.h>
 #include "TransformPatterns.h"
 #include "connectMysql.h"
+#include "config.h"
 using namespace std;
 
 const string PATH_TO_PATTERNS = "/home/prof1k/LicensePlateGit/Recognition/Debug/config/ru.patterns";
@@ -144,6 +145,10 @@ int main() {
 
 	//uuid_make(uuid, UUID_MAKE_V1);
 	//cout << uuid->uuid_st;
+
+	Config config;
+	config.read_config();
+
 
 
 	CameraAndDetect();

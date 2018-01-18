@@ -5,17 +5,18 @@
  *      Author: prof1k
  */
 
+#include <iostream>
+
+using namespace std;
+
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-namespace agcsr {
-
-class config {
+class Config {
 public:
-	config();
-	virtual ~config();
+	Config();
+	virtual ~Config();
+	void read_config();
 };
-
-} /* namespace agcsr */
 
 #endif /* CONFIG_H_ */
