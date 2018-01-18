@@ -24,6 +24,9 @@
 								<option id="gnu.c.compiler.option.debugging.level.1948386362" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.include.paths.184999710" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="/usr/local/include/opencv"/>
+									<listOptionValue builtIn="false" value="/usr/local/share/uuid/include"/>
+									<listOptionValue builtIn="false" value="/usr/include/mysql++"/>
+									<listOptionValue builtIn="false" value="/usr/include/mysql"/>
 									<listOptionValue builtIn="false" value="/usr/local/include/tesseract"/>
 									<listOptionValue builtIn="false" value="/usr/local/include/leptonica"/>
 								</option>
@@ -34,6 +37,9 @@
 								<option id="gnu.cpp.compiler.option.debugging.level.1767260716" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.1598722423" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="/usr/local/include/opencv"/>
+									<listOptionValue builtIn="false" value="/usr/local/share/uuid/include"/>
+									<listOptionValue builtIn="false" value="/usr/include/mysql++"/>
+									<listOptionValue builtIn="false" value="/usr/include/mysql"/>
 									<listOptionValue builtIn="false" value="/usr/local/include/leptonica"/>
 									<listOptionValue builtIn="false" value="/usr/local/include/tesseract"/>
 								</option>
@@ -43,9 +49,13 @@
 							<tool id="cdt.managedbuild.tool.gnu.cross.cpp.linker.1008825451" name="Cross G++ Linker" superClass="cdt.managedbuild.tool.gnu.cross.cpp.linker">
 								<option id="gnu.cpp.link.option.paths.1971007179" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
 									<listOptionValue builtIn="false" value="/usr/local/lib"/>
+									<listOptionValue builtIn="false" value="/usr/local/share/uuid/lib"/>
+									<listOptionValue builtIn="false" value="/usr/lib"/>
 								</option>
 								<option id="gnu.cpp.link.option.libs.198809565" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" useByScannerDiscovery="false" valueType="libs">
 									<listOptionValue builtIn="false" value="opencv_dnn"/>
+									<listOptionValue builtIn="false" value="uuid"/>
+									<listOptionValue builtIn="false" value="mysqlpp"/>
 									<listOptionValue builtIn="false" value="tesseract"/>
 									<listOptionValue builtIn="false" value="lept"/>
 									<listOptionValue builtIn="false" value="openalpr"/>

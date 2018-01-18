@@ -8,6 +8,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include "source/utf8.h"
 //#include <sstream>
 //#include <iterator>
 
@@ -22,9 +23,10 @@ public:
 	TransformPatterns(string pathToPatterns);
 	virtual ~TransformPatterns();
 	// Заменяем нули на буквы
-	string transformation(string vehicleNumber, string pattern_regex);
-private:
+	string transformation(string vehicleNumber);
 	void initialize(string pathToPatterns);
+private:
+
 };
 
 

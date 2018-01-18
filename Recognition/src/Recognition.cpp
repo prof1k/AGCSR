@@ -1,9 +1,9 @@
 //============================================================================
 // Name        : Recognition.cpp
 // Author      : Sukhodoev IS
-// Version     :
+// Version     : 0.3
 // Copyright   : Study Project
-// Description : Hello World in C++, Ansi-style
+// Description : Automatic gantry control system by recognition
 //============================================================================
 
 #include <iostream>
@@ -30,20 +30,20 @@ void RecognitionPlate(cv::Mat plate)
         if (openalpr.isLoaded())
         {
         //imshow("Input", plate);  //обойдемся дебагом
-        openalpr.setTopN(5);
+        openalpr.setTopN(1);
         //openalpr.setDefaultRegion("il");
         std::vector<alpr::AlprRegionOfInterest> regionsOfInterest;
         regionsOfInterest.push_back(alpr::AlprRegionOfInterest(0, 0, plate.cols, plate.rows));
         alpr::AlprResults results = openalpr.recognize(plate.data, plate.elemSize(), plate.cols, plate.rows, regionsOfInterest);
         string transorm;
         // cout << results.plates.size() << endl;
-        for (int i = 0; i < results.plates.size(); i++)
+        for (size_t i = 0; i < results.plates.size(); i++)
         {
            alpr::AlprPlateResult plate = results.plates[i];
            std::cout << "plate" << i << ": " << plate.topNPlates.size() << " results" << std::endl;
            alpr::AlprPlate candidate;
 
-           for (int k = 0; k < plate.topNPlates.size(); k++)
+           for (size_t k = 0; k < plate.topNPlates.size(); k++)
            {
              candidate = plate.topNPlates[k];
 
@@ -52,29 +52,32 @@ void RecognitionPlate(cv::Mat plate)
             	 break;
              }
 
-             std::cout << "    - " << candidate.characters << "\t confidence: " << candidate.overall_confidence;
-             std::cout << "\t pattern_match: " << candidate.matches_template << std::endl;
+             /*std::cout << "    - " << candidate.characters << "\t confidence: " << candidate.overall_confidence;
+             std::cout << "\t pattern_match: " << candidate.matches_template << std::endl;*/
            }
 
            if (!candidate.matches_template)
            {
-           alpr::AlprPlate candi2 = plate.bestPlate;
-           transorm = "";
-           transorm = tr.transformation(candi2.characters);
-           if (transorm != "")
-           {
-        	   std::cout << "    - " << candi2.characters << "\t confidence: " << candi2.overall_confidence;
-        	   std::cout << "\t pattern_match: " << candi2.matches_template << std::endl;
+        	   alpr::AlprPlate candi2 = plate.bestPlate;
+        	   transorm = "";
+        	   transorm = tr.transformation(candi2.characters);
+        	   if (transorm != "")
+        	   {
+            	 std::cout << "    - " << candi2.characters << "\t confidence: " << candi2.overall_confidence;
+            	 std::cout << "\t pattern_match: " << candi2.matches_template << std::endl;
+        	   }
+        	   else
+        	   {
+            	 std::cout << "    - " << candidate.characters << "\t confidence: " << candidate.overall_confidence;
+            	 std::cout << "\t pattern_match: " << candidate.matches_template << std::endl;
+        	   }
+        	   cout << "  After transform. " << transorm << endl;
            }
            else
            {
         	   std::cout << "    - " << candidate.characters << "\t confidence: " << candidate.overall_confidence;
-        	                  std::cout << "\t pattern_match: " << candidate.matches_template << std::endl;
-           }
-           cout << "  After transform. " << transorm << endl;
-           }
-           else
-           {
+        	   std::cout << "\t pattern_match: " << candidate.matches_template << std::endl;
+
         	   // MUTIM CANDIDAT!!!
            }
 
@@ -137,6 +140,11 @@ void CameraAndDetect()
 
 int main() {
 	//cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
+
+	//uuid_make(uuid, UUID_MAKE_V1);
+	//cout << uuid->uuid_st;
+
+
 	CameraAndDetect();
 	return 0;
 }
