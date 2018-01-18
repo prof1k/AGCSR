@@ -18,6 +18,7 @@
 #include <tesseract/strngs.h>
 #include <alpr.h>
 #include "TransformPatterns.h"
+#include "connectMysql.h"
 using namespace std;
 
 const string PATH_TO_PATTERNS = "/home/prof1k/LicensePlateGit/Recognition/Debug/config/ru.patterns";

@@ -8,7 +8,7 @@
 #include "TransformPatterns.h"
 
 const int CACHE_SIZE = 50;
-int pattern_size;
+size_t pattern_size;
 
 string* pattern_cache = NULL;
 /// <summary>
@@ -89,7 +89,7 @@ void TransformPatterns::initialize(string pathToPatterns)
 		{
 
 		string str;
-		int i = 0;
+		size_t i = 0;
 		while (getline(patternsFile,str))
 		{
 			//pattern_cache[i] = str.erase(str.find("ru\t")-1);

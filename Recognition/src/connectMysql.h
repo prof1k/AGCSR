@@ -17,7 +17,7 @@ using namespace std;
 
 class connectMysql {
 public:
-	connectMysql();
+	connectMysql(string db, string server, string user, string password, int port);
 	virtual ~connectMysql();
 	void connect(string db, string server, string user, string password, int port);
 	bool AddVehicleNumber(string vehicle_number, bool allowed_entry, bool single_entry, string name_of_company_organization);
